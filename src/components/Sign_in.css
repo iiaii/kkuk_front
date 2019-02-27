@@ -1,0 +1,49 @@
+.Sign_in {
+    text-align: center;
+}
+
+.title {
+    font-family: 'NotoSansKR', sans-serif;
+    font-weight: 600;
+    position: absolute;
+    left: 50%;
+    top: 7%;
+    transform: translate(-50%, -50%);
+}
+  
+#logo {
+    position: absolute;
+    height: 22%;
+    left: 50%;
+    top: 23%;
+    transform: translate(-50%, -50%);
+}
+
+.input_area {
+    position: absolute;  
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+}
+
+#id {
+    width: 300px;
+}
+
+#pwd {
+    width: 300px;
+}
+
+.btn_area {
+    position: absolute;  
+    left: 50%;
+    top: 75%;
+    transform: translate(-50%, -50%);
+}
+
+.corp {
+    position: absolute;
+    left: 50%;
+    top: 93%;
+    transform: translate(-50%, -50%);
+}
