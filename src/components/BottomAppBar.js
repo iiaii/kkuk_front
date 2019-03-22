@@ -19,25 +19,35 @@ import CheckCircle from '@material-ui/icons/CheckCircle';
 import SlideBookInfo from './SlideBookInfo';
 
 
-const empty_time_txt = '0 ~ 0 : 0시간';
+const empty_time_txt = '0 - 0 : 0시간';
+
+const colors = {
+    btn_clicked: '#468FF3', //'#57FF9A',
+    background: '#453C48',
+    text: ''
+}
 
 const styles = theme => ({
     appBar: {
         top: 'auto',
-        bottom: 0,
-        height: 50
+        background: colors.background, 
+        color: colors.text,
+        fontFamily: '',
+        fontWeight: 700,
+        fontSize: 23,
+        bottom: -5,
     },
     toolbar: {
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginTop: -5,
+
     },
 });
 
 class BottomAppBar extends React.Component {
 
     set_selected_time() {
-        return this.props.selected_time_info.start_time + ' ~ ' + 
+        return this.props.selected_time_info.start_time + ' - ' + 
                 Number(this.props.selected_time_info.start_time + 
                 this.props.selected_time_info.count) + ' : ' + this.props.selected_time_info.count + '시간';
     }
@@ -46,17 +56,20 @@ class BottomAppBar extends React.Component {
         const { classes } = this.props;
 
         return (
-            <AppBar position="fixed" color="primary" className={classes.appBar}>
+            <AppBar position="fixed" color="primary" className={classes.appBar} >
                 <Toolbar className={classes.toolbar}>
                     <div className={classes.date}>
                         {this.props.date ? this.props.date : ' '}
                     </div>
-                    <div className={classes.time}>
+                    <div className={classes.time} style={{fontWeight: 1050,
+        fontSize: 18, }}>
                         {this.props.selected_time_info ? this.set_selected_time() : empty_time_txt}
                     </div>    
                     <div>
                     {this.props.selected_time_info && this.props.selected_time_info.count!==0 ? 
-                    <SlideBookInfo color='#9cff88' disabled={false} 
+                    <SlideBookInfo 
+                    color={colors.btn_clicked} 
+                    disabled={false} 
                     user_info={this.props.user_info} 
                     space={this.props.space} 
                     date={this.props.date} 

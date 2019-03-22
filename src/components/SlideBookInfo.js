@@ -89,7 +89,14 @@ class SlideBookInfo extends React.Component {
   };
 
   try_booking = async event => {
-    // 예약 시도 api 호출
+    // Todo 예약 시도 api 호출
+    const booked_info = {
+        user_info: this.props.user_info,
+        space: this.props.space,
+        date: this.props.date, 
+        selected_time: this.props.selected_time
+    }
+
     const response = {
         status: 200,
         booked_info: {
@@ -106,6 +113,7 @@ class SlideBookInfo extends React.Component {
         booked_info.agreement = (this.state.agreement!==undefined);
         booked_info.approver = this.state.approver;
         booked_info.event_contents = this.state.event_contents;
+        console.log(booked_info)
         // await this.setState({ booked_complete: true, booked_info: booked_info });
         alert(booked_info.msg +'\n\n예약자 정보: '+ booked_info.user_info.name +' '+ booked_info.user_info.school_id +' '+ booked_info.user_info.college +'\n대여장소: '+ booked_info.space +'\n대여 날짜: '+ booked_info.date +'\n대여 시간: '+ booked_info.selected_time +'\n승인자: '+ booked_info.approver +'\n행사내용: '+ booked_info.event_contents);
         window.location.assign('/sign-in');

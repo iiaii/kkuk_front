@@ -8,9 +8,16 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import TimeTable from './TimeTable';
 
+const colors = {
+    tab: '#50B679',
+    tab_text: '#FFF',
+    content_bottom: '#FFF', //'#50B679',
+    content_top: '#efefef', //'#246A40'
+}
+
 function TabContainer({ children, dir }) {
     return (
-        <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
+        <Typography component="div" dir={dir} style={{ paddingTop: 15 , paddingLeft: 24 , paddingRight: 24, paddingBottom: 60 }}>
             {children}
         </Typography>
     );
@@ -44,11 +51,12 @@ class FullWidthTabs extends React.Component {
         this.setState({ index: index });
     };
 
-    set_selected_time = async (selected_time_info) => {
+    // 선택한 시간 정보 전달
+    set_selected_time = (selected_time_info) => {
         let now_time_table = this.state.now_time_table;
         now_time_table[this.state.value] = selected_time_info;
         this.setState({ now_time_table : now_time_table });
-        await this.props.set_selected_time(now_time_table[this.state.value]);
+        this.props.set_selected_time(now_time_table[this.state.value]);
     }
 
     render() {
@@ -63,10 +71,11 @@ class FullWidthTabs extends React.Component {
                         indicatorColor="primary"
                         textColor="primary"
                         variant="scrollable"
-                        scrollButtons="auto"
+                        scrollButtons="off"
+                        style={{ background: colors.tab}}
                     >
                         {this.props.time_tables.map((elements, index) => {
-                            return <Tab label={elements.date} key={index} />;
+                            return <Tab label={elements.date} key={index} style={{ background: colors.tab , color: colors.tab_text}} />;
                         })}
                     </Tabs>
                 </AppBar>
@@ -74,10 +83,11 @@ class FullWidthTabs extends React.Component {
                     axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                     index={this.state.value}
                     onChangeIndex={this.handleChangeIndex}
+                    style={{ background: ''/*`linear-gradient(25deg, ${colors.content_bottom} 30%, ${colors.content_top} 70%)`*/}}
                 >
                 {this.props.time_tables.map((element, index) => {
                     return (
-                        <TabContainer style={{ padding: 1 * 3 }} dir={theme.direction} key={index} >
+                        <TabContainer style={{ padding: 3 }} dir={theme.direction} key={index} >
                             <TimeTable
                                 date={element.date}
                                 time_table={element.time_table}

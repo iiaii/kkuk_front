@@ -8,18 +8,17 @@ let last = 0;
 let index_checker = 0;
 
 const colors = {
-    selected_color: '#468FF3',
+    selected_color: '#468FF3',//'#56FF99', //'#468FF3',
     unselected_color: '',
-    disabled_color: '#9F9F9F',
+    disabled_color: '#BFBFBF',
 }
 
 const styles = theme => ({
     root : {
-        marginTop: -5,
-        marginBottom: 40
+        backgroundColor: theme.palette.background.paper,
     },
     time_table: {
-        background: 'linear-gradient(45deg, #B8FFE2 10%, #D8FFE2 70%)',
+        background: '#FFFF',//'linear-gradient(45deg, #B8FFE2 10%, #D8FFE2 70%)',
         borderRadius: 7,
         border: 4,
         color: 'white',
@@ -33,27 +32,33 @@ class TimeTable extends React.Component {
         today_s_time_table: ['', '', '', '', '', '', '', '', '', '', '', '', '']
     };
 
-    handleListItemClick = async (event, index) => {
+    // time_table 클릭했을때
+    handleListItemClick = (event, index) => {
+        let time_table = this.state.today_s_time_table;
+
         index_checker++;
         if (index_checker % 2 === 1) {
             first = index;
-            let time_table = await this.reset_selected_area();
-            await this.setState({ today_s_time_table: time_table });
+            time_table = this.reset_selected_area();
         } else {
             last = index;
             index_checker = 0;
-            await this.selected_area_maker(this.get_difference());
+            time_table = this.selected_area_maker(time_table, this.get_difference());
         }
-        await this.props.set_selected_time(this.check_selected_area());
+        this.setState({ today_s_time_table: time_table });
+        this.props.set_selected_time(this.check_selected_area(time_table));
     };
 
+    // 첫번째 클릭인지 확인
+    // is_this_
+
     // 선택된 영역 확인
-    check_selected_area () {
+    check_selected_area (time_table) {
         let count = 0;
         let start_time = 0;
         
-        for(let i=0 ; i<this.state.today_s_time_table.length ; i++) {
-            if (this.state.today_s_time_table[i] === colors.selected_color) {
+        for(let i=0 ; i<time_table.length ; i++) {
+            if (time_table[i] === colors.selected_color) {
                 count++;
                 if(count === 1) {
                     start_time = i + 9;
@@ -92,32 +97,28 @@ class TimeTable extends React.Component {
     }
 
     // 선택된 영역 표시하기
-    selected_area_maker(difference) {
-        let time_table = this.state.today_s_time_table;
-
+    selected_area_maker(time_table, difference) {
         // 같은 곳을 두번 선택 했을때 (선택 취소)
         if (difference === 0) {
             time_table[last] = colors.unselected_color;
-            this.setState({ today_s_time_table: time_table });
-            return;
+            return time_table;
         }
         // 4시간 초과로 선택했을때
         if (difference >= 4) {
             time_table[first] = colors.unselected_color;
             time_table[last] = colors.unselected_color;
-            this.setState({ today_s_time_table: time_table });
             alert('대여 가능한 최대 시간은 4시간입니다');
+            return time_table;
         } 
         // 4시간 이하로 선택했을때
         else { 
-            time_table = time_table.map((line, index) => {
+            return time_table.map((line, index) => {
                 if (index >= first && index <= last) {
                     return colors.selected_color;
                 } else {
                     return colors.unselected_color;
                 }
             })
-            this.setState({ today_s_time_table: time_table });
         }
     }
 

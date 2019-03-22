@@ -66,18 +66,18 @@ class Sign_in extends React.Component {
                 <div className='title'>건국대학교 통합 예약 시스템</div>
                 <img id='logo' src={kkuk_down} alt='kkuk_logo'/>
                 <div className='input_area'>
-                    <TextField className='input_area' type="text" label="건국포털 아이디" variant="outlined" id="id" onChange={this.handle_change}/>
+                    <TextField className='input_area' type="text" label="건국포탈 아이디" variant="outlined" id="id" onChange={this.handle_change}/>
                     <br></br>
                     <br></br>
                     <TextField className='input_area' type="password" label="비밀번호" variant="outlined" id="pwd" onChange={this.handle_change} autoComplete="current-password"/>
                 </div>
                 <div className='btn_area'>
                     <Button variant="contained" className='sign_in' style={{ background: '#246A40', color: 'white' }} onClick={this.try_sign_in.bind(this)}>로그인</Button>
-                    <br></br><br></br>
-                    <Button href='/sign-up' color="primary" className='sign_up'>회원가입</Button> |
-                    <Button href='/account-recovery' color="primary" className='account_recovery'>비밀번호 찾기</Button>
                 </div>
-                <div className='corp'>© idio.T Corp.</div>
+                <div className='other_sites'>
+                    <Button href='http://www.konkuk.ac.kr/do/Index.do' color="primary" className='sign_up'>건국대학교</Button> | <Button href='https://portal.konkuk.ac.kr/' color="primary" className='account_recovery'>건국 포탈</Button>
+                </div>
+                <div className='corp' style={{fontSize : 10}}>© 2014 by KONKUK UNIVERSITY</div>
             </div>
         );
     }

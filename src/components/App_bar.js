@@ -128,11 +128,11 @@ class PrimarySearchAppBar extends React.Component {
       <div className={classes.root}>
         <AppBar className={classes.app_bar} position="static">
           <Toolbar className={classes.tool_bar}>
-            <IconButton href='/sign-in' className={classes.menuButton} color="inherit" aria-label="Open drawer">
+            <IconButton href='/home' className={classes.menuButton} color="inherit" aria-label="Open drawer">
               <HomeIcon  />
             </IconButton>
             <Typography className={classes.title} color="inherit" noWrap>
-               풋살장
+               KKUK
             </Typography>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>

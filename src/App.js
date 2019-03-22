@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Home from './components/Home';
+import Reserve from './components/Reserve';
 import Sign_in from './components/Sign_in';
 import Error from './components/Error';
 import Sign_up from './components/Sign_up';
@@ -22,6 +23,7 @@ class App extends React.Component {
           <Switch>
             <Route path='/sign-in' component={Sign_in} exact />
             <Route path='/home' component={Home} />
+            <Route path='/reserve' component={Reserve} />
             <Route path='/sign-up' component={Sign_up} />
             <Route path='/account-recovery' component={Account_recovery} />
             <Route path='/end' component={End} />
